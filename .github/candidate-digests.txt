@@ -251,9 +251,18 @@
 # ends that device's earlier grant. spec/security-v1.md: the Approve row
 # says it is the reference transition alone and that pairing::approve
 # composes Revoke with it; the frozen transition itself is unchanged.
+#
+# CTL-1 (2026-11-19) changed spec/cli-v1.md and spec/install-v1.md on
+# purpose, for the fork's non-interactive `syrtis-agent ctl` subcommands.
+# spec/cli-v1.md adds the "ctl" section (commands, the one-line
+# `SYRTIS-CTL-V1 ` stdout frame, exit statuses, the `pending approve`
+# rule, the commands deliberately not provided), says that `ctl` takes
+# non-secret values, and adds its acceptance rows. spec/install-v1.md: the
+# Linux unit now sets StandardOutput=null and StandardError=null. No
+# frozen contract, wire, schema or control command changed.
 4eb5d2ca0aa2906676095dd4d2450d142f15fd6e8cdfbff774ee9d7cbf2e9373  spec/cache-store-v1.md
-055a5c81aade6aec75c8f43bccb8128ab22ca1691b15b690ca833d0005176a2f  spec/install-v1.md
-14448b1b0ca3be54b08c8c13f0e267eaa12058bcd571d678a481e574d2d7859a  spec/cli-v1.md
+39b9f3597291d28123f28c8a6ba80dde937681d4376c0e94df845bec1c6083e6  spec/install-v1.md
+8658f38287931a02320e7913102d34bf39188745cfc6591b1873d154fab937d9  spec/cli-v1.md
 5e067392c4493745c43ea18da06dca5bbba1ff8a48bf5ddfddcae16036a9cdc8  spec/control-v1.md
 c6cfaf6793ab2d9319c461ac538c8d9e95428fdf2eebe54f630e6337673b3580  spec/pairing-v1.md
 a2cfe9ca7fffd0f6907d42cec630978303612561aa98df182b137fb41a5b505b  spec/runtime-v1.md

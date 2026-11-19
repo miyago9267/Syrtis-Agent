@@ -29,7 +29,7 @@ The same source installed twice gives the same bytes and modes. The binary path 
 
 ### Autostart templates
 
-`packaging/macos/com.nyanako.syrtis.agent.plist` and `packaging/linux/syrtis-agent.service`, compiled in with `include_str!`. The single `@BINARY@` is replaced by the binary path. The plist sets `Label`, `ProgramArguments = [binary, "run"]` and `RunAtLoad`; the unit sets `ExecStart=<binary> run` and `WantedBy=default.target`.
+`packaging/macos/com.nyanako.syrtis.agent.plist` and `packaging/linux/syrtis-agent.service`, compiled in with `include_str!`. The single `@BINARY@` is replaced by the binary path. The plist sets `Label`, `ProgramArguments = [binary, "run"]` and `RunAtLoad`; the unit sets `ExecStart=<binary> run`, `StandardOutput=null`, `StandardError=null` (nothing the resident prints reaches a journal or a session) and `WantedBy=default.target`.
 
 ## Uninstall
 

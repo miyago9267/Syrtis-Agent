@@ -181,7 +181,8 @@ fn golden(binary: &Path) -> String {
 #[cfg(target_os = "linux")]
 fn golden(binary: &Path) -> String {
     format!(
-        "[Unit]\nDescription=Syrtis Agent\n\n[Service]\nExecStart={} run\n\n\
+        "[Unit]\nDescription=Syrtis Agent\n\n[Service]\nExecStart={} run\n\
+StandardOutput=null\nStandardError=null\n\n\
 [Install]\nWantedBy=default.target\n",
         binary.display()
     )
@@ -753,5 +754,18 @@ fn a_relative_home_is_invalid() {
     assert_eq!(
         install(Path::new("relative/home"), &home.source(b"agent")),
         Err(InstallError::Invalid)
+    );
+}
+
+/// The Linux unit sends the resident's stdout and stderr to null, so
+/// nothing it prints can reach a journal or an ssh session. Checked on
+/// every platform; the Linux-only `golden` above holds the same bytes.
+#[test]
+fn the_linux_unit_discards_stdout_and_stderr() {
+    assert_eq!(
+        syrtis_agent::install::LINUX_UNIT_TEMPLATE,
+        "[Unit]\nDescription=Syrtis Agent\n\n[Service]\nExecStart=@BINARY@ run\n\
+StandardOutput=null\nStandardError=null\n\n\
+[Install]\nWantedBy=default.target\n"
     );
 }
